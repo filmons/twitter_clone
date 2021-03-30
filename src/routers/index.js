@@ -11,7 +11,19 @@ const router = express.Router();
 // create, post, get one or get all Tweets
 router.get("/", tweetController.findAllTweets);
 // router.get("/tweets/:id", isAuth, tweetController.findOneTweet);
-// router.post("/tweets", tweetController.addOneTweet);
+router.post("/tweets", tweetController.addOneTweet);
+router.post("/tweets/delete/:id", tweetController.deleteOneTweet);
+
+// router.post("/tweets/delete/:id", function(request, response) {
+// tweetController.deleteTweet
+// });
+
+
+
+// app.post('/user/all', function(req, res){
+//     Controller.Create
+//   });
+
 
 // inscription 
 // router.get("/signup", userController.signUp); 

@@ -14,6 +14,39 @@ exports.findAllTweets = (request, response) => {
     });
 }
 
+
+exports.addOneTweet = (request, response) => {
+    Tweet.createTweet(request.body, (error, result) => {
+        if (error) {
+            response.send(error.message);
+        }
+
+        response.redirect("/");
+    })
+}
+
+
+exports.deleteOneTweet = (request, response) => {
+    const { tweet } = request;
+    console.log(tweet);
+
+    Tweet.deleteTweet((error, tweet) => {
+        if (error) {
+            response.send(error.message);
+        }
+
+        console.log(tweet);
+        server.response("tweet deleted");
+        // response.redirect("/");
+
+
+
+        // response.render("index.ejs", { tweets, tweet });
+    });
+}
+
+
+
 // exports.findOne = (request, response) => {
 //     const { id } = request.params;
 //     const { user } = request;
