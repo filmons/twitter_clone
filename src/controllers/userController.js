@@ -46,18 +46,15 @@ const MAXAGE = Math.floor(Date.now() / 1000) + (60 * 60); // 1 hour of expiratio
 //   });
 // }
 
-// exports.logIn = (request, response) => {
-//   // response.render("login.ejs");
-// }
+exports.logIn = (request, response) => {
+  response.render("login.ejs");
+}
 
 exports.authentificate = (request, response) => {
-  // const { username, password } = request.body;
-
-  console.log("REQUEST" + request )
-  console.log("PARAMS" + request.params )
-  console.log("BODY" + request.body )
-  // console.log("THIS " + username);
-  // User.getByUsername(username, (error, result) => {
+  const { username, password } = request.body;
+  
+  console.log(username, password);
+  // User.getbyUsername(username, (error, result) => {
 
   //   if (error) {
   //     response.send(error.message);
@@ -98,7 +95,7 @@ exports.authentificate = (request, response) => {
 //       });
 
 //     });
-  //   response.send(username);
+    response.send(username);
   // })
 }
 
