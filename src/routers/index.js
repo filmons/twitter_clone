@@ -13,29 +13,26 @@ router.get("/", tweetController.findAllTweets);
 // router.get("/tweets/:id", isAuth, tweetController.findOneTweet);
 router.post("/tweets", tweetController.addOneTweet);
 router.post("/tweets/delete/:id", tweetController.deleteOneTweet); // :x = params (in rul) / val dynamic
-router.post("/tweets/edit/:id
-        ", tweetController.editOneTweet);
-        // router.post("/tweets/edit/:id", tweetController.editOneTweet);
-        // /users/:userId/books/:bookId
+router.post("/tweets/edit/:id", tweetController.editOneTweet);
+// router.post("/tweets/edit/:id", tweetController.editOneTweet);
+// /users/:userId/books/:bookId
 
-        // router.post("/tweets/delete/:id", function(request, response) {
-        // tweetController.deleteTweet
-        // });
+// router.post("/tweets/delete/:id", function(request, response) {
+// tweetController.deleteTweet
+// });
 
-
-
-        // app.post('/user/all', function(req, res){
-        //     Controller.Create
-        //   });
+// app.post('/user/all', function(req, res){
+//     Controller.Create
+//   });
 
 
-        // inscription 
-        // router.get("/signup", userController.signUp); 
-        // router.post("/signup", userController.newAccount);
+// inscription 
+// router.get("/signup", userController.signUp); 
+// router.post("/signup", userController.newAccount);
 
-        // l'authentification 
-        // router.get("/login", userController.logIn); 
-        // router.post("/login", userController.authentificate);
-        // router.get("/logout", userController.logOut);
+// l'authentification 
+// router.get("/login", userController.logIn); 
+// router.post("/login", userController.authentificate);
+// router.get("/logout", userController.logOut);
 
-        module.exports = router;
+module.exports = router;

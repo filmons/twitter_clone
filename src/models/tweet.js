@@ -41,14 +41,14 @@ exports.deleteTweet = (id, callback) => { // params = tweet = obj.id callback is
 }
 
 
-exports.editTweet = (tweet, callback) => { // params = tweet = obj.id callback is a func
+exports.editTweet = (id, name, callback) => { // params = tweet = obj.id callback is a func
     // callback = function
 
     // console.log(`create tweet | tweet contents: `);
-    console.log(`++/tweet.js/ editTweet / tweet contents: ` + tweet);
+    console.log(`++/tweet.js/editTweet/ (id, name) contents: ${id} | ${name}`);
 
 
-    db.query(`UPDATE tweet SET text = ${tweet} WHERE id = ${tweet};`, (error, result) => {
+    db.query(`UPDATE tweet SET text = '${name}' WHERE id = ${id};`, (error, result) => {
         // db.query(`DELETE FROM tweet WHERE id = ${tweet.id};`, (error, result) => {
         if (error) {
             console.log("error: ", error);
