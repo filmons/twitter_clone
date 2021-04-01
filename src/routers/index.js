@@ -12,10 +12,12 @@ const router = express.Router();
 router.get("/", tweetController.findAllTweets);
 // INSCRIPTION 
 // router.get("/signup/:id", userController.signUp); // recupérer la page d'inscriptions
+// router.get("/signup/", userController.signUp); // recupérer la page d'inscriptions
+
 // router.post("/signup", userController.newAccount); // recupère   les donées de l'utilisateur puis le redirige vers la page login
 
 // AUTHENTICATION
-router.get("/login", userController.logIn); 
+router.get("/login", userController.logIn);
 router.post("/login", userController.authentificate);
 
 // router.get("/logout", userController.logOut);
