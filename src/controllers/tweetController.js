@@ -33,7 +33,7 @@ exports.getAllTweets = (request, response) => {
       const oneTweet = result;
       const tweeterName = result[0].name;
   
-      response.render("index.ejs", { tweeterName, oneTweet, tweets});
+      response.render("profile.ejs", { tweeterName, oneTweet, tweets});
       
     });
   }
