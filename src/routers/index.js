@@ -3,13 +3,13 @@ const express = require("express");
 const isAuth = require('../middlewares/isAuth');
 
 const userController = require("../controllers/userController");
-const tweetController = require("../controllers/tweetController");
+// const tweetController = require("../controllers/tweetController");
 
 
 const router = express.Router();
 
-// create, post, get one or get all Tweets
-router.get("/", tweetController.findAllTweets);
+// CREATE, POST, GET ONE OR GET ALL TWEETS
+// router.get("/", tweetController.findAllTweets);
 // router.get("/tweets/:id", isAuth, tweetController.findOneTweet);
 router.post("/tweets", tweetController.addOneTweet);
 router.post("/tweets/delete/:id", tweetController.deleteOneTweet); // :x = params (in rul) / val dynamic
@@ -26,13 +26,24 @@ router.post("/tweets/edit/:id", tweetController.editOneTweet);
 //   });
 
 
-// inscription 
-// router.get("/signup", userController.signUp); 
-// router.post("/signup", userController.newAccount);
+// INSCRIPTION 
+router.get("/signup/:id", userController.signUp); 
+router.post("/signup", userController.newAccount);
 
-// l'authentification 
+// AUTHENTICATION
 // router.get("/login", userController.logIn); 
-// router.post("/login", userController.authentificate);
+router.post("/login", userController.authentificate);
 // router.get("/logout", userController.logOut);
 
 module.exports = router;
+
+// SANDRO EXEMPLE ROUTER 
+
+// router.get("/promos/:id", isAuth, promoController.findOne);
+// router.post("/promos", promoController.addOne);
+
+// router.get("/signup", userController.signup);
+// router.post("/signup", userController.newAccount);
+// router.get("/login", userController.login);
+// router.post("/login", userController.authenticate);
+// router.get("/logout", userController.logout);
