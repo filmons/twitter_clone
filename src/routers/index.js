@@ -12,8 +12,8 @@ const router = express.Router();
 router.get("/", tweetController.findAllTweets);
 // INSCRIPTION 
 // router.get("/signup/:id", userController.signUp); // recupérer la page d'inscriptions
-router.get("/signup", userController.signUp); // recupérer la page d'inscriptions // render signup page on user action
 router.post("/signup", userController.newAccount); // recupère   les donées de l'utilisateur puis le redirige vers la page login
+router.get("/signup", userController.signUp); // recupérer la page d'inscriptions // render signup page on user action
 
 
 // AUTHENTICATION

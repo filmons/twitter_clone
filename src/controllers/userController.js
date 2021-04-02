@@ -12,47 +12,51 @@ exports.signUp = (request, response) => {
 exports.newAccount = (request, response) => {
     const { username, password, email, phone_number, first_name, last_name, birth_day, city } = request.body; // more efficient
     // console.log(request.body);
-    console.log(username);
+    console.log(`first: ` + username);
 
     // const requestBodyOject = request.body;
     // console.log(`response:` + Object.keys(response));
     // response.send("Ok");
-    User.getByUsername(username, (error, result) => { // < callback is a function with 2 params
-        console.log(`+++got into getByUsername`);
+    User.getByUsername(username, (error, result) => { // < callback is a function with 2 params // model // gets data from db from user.js
+
+        console.log(`username: ` + username);
+        // console.log(`+++got into getByUsername`);
         if (error) {
             response.send(error.message);
-        }
-        if (result.length !== 0) {
+        } else if (result.length !== 0) {
             response.send("A user with this username already exists!");
-        }
-        // const saltRounds = 10;
-        // bcrypt.hash(password, saltRounds, (error, hash) => {
-        //         if (error) {
-        //             response.send(error.message);
-        //         }
-        //         console.log(`+++hashed password: ` + hash);
-        const newUser = {
-            username,
-            email,
-            phone_number,
-            first_name,
-            last_name,
-            birth_day,
-            city,
-            password: hash
-        }
-        console.log(`+++newUser: ` + newUser);
-        User.createUser(newUser, (error, result) => {
-                if (error) {
-                    response.send(error.message);
-                }
-                response.send(username);
-                // response.redirect("/login");
+        } else {
+            // const saltRounds = 10;
+            // bcrypt.hash(password, saltRounds, (error, hash) => {
+            //         if (error) {
+            //             response.send(error.message);
+            //         }
+            //         console.log(`+++hashed password: ` + hash);
+            const newUser = {
+                username,
+                email,
+                phone_number,
+                first_name,
+                last_name,
+                birth_day,
+                city,
+                password
+            }
+
+            // password: hash
+            console.log(`+++newUser: ` + newUser);
+            User.createUser(newUser, (error, result) => {
+                    if (error) {
+                        response.send(error.message);
+                    }
+                    // response.send(username);
+                    response.redirect("/");
 
 
-            })
-            // })
-            // response.send("Ok");
+                })
+                // })
+                // response.send("Ok");
+        }
     });
 }
 
