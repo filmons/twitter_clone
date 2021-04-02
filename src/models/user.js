@@ -39,6 +39,7 @@ exports.createUser = (user, callback) => {
         "${user.city}");`, (error, result) => {
 
 
+<<<<<<< HEAD
 
         // db.query(`SELECT * FROM user;`, (error, result) => {
 
@@ -49,6 +50,17 @@ exports.createUser = (user, callback) => {
         }
         callback(null, result);
     })
+=======
+exports.getByUsername= (username, callback) => {
+  db.query(`SELECT * FROM user WHERE username = "${username}";`, (error, result) => {
+    if (error) {
+      console.log("error: ", error);
+      callback(error, null);
+      return;
+    }
+    callback(null, result);
+    }) 
+>>>>>>> logout and  authentification OK, remaining set hash feature
 }
 
 // AFTER THAT I CREATE A NEW USER'S

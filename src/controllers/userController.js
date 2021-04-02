@@ -66,6 +66,7 @@ exports.logIn = (request, response) => {
 }
 
 exports.authentificate = (request, response) => {
+<<<<<<< HEAD
     const { username, password } = request.body;
 
     console.log(username, password);
@@ -119,3 +120,62 @@ exports.authentificate = (request, response) => {
 // response.redirect("/");
 
 //////
+=======
+  const { username, password } = request.body;
+      
+  console.log(request.body);
+
+  User.getByUsername(username,(error, result) => {
+
+    if (error) {
+      response.send(error.message);
+    }
+
+    if (result.length === 0) {
+      response.send("This user doesn't exist!");
+    }
+
+    const hash = result[0].password;
+      
+   
+      bcrypt.compare(password, hash, (error, correct) => {
+        console.log("PASSWORD" + hash)
+     
+        if (error) {
+        response.send(error.message);
+      }
+
+      if (!correct) {
+        response.send("Invalid password!");
+      }
+
+      const user = {
+        name: result[0].name,
+        username: result[0].username,
+        exp: MAXAGE
+      };
+
+      jwt.sign(user, SECRET, (error, token) => {
+        if (error) {
+          response.send(error.message);
+        }
+
+        request.user = {
+          name: result[0].name,
+          username: result[0].username,
+        };
+        response.cookie('authcookie', token, { maxAge: MAXAGE });
+        response.redirect('/');
+      });
+
+    });
+    
+  })
+}
+
+exports.logOut = (request, response) => {
+  // response.clearCookie("authcookie");
+  response.redirect("/login");
+  
+}
+>>>>>>> logout and  authentification OK, remaining set hash feature

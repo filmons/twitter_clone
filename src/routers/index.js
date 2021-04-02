@@ -34,8 +34,7 @@ router.get("/signup", userController.signUp); // recupérer la page d'inscriptio
 // AUTHENTICATION
 router.get("/login", userController.logIn);
 router.post("/login", userController.authentificate);
-
-// router.get("/logout", userController.logOut);
+router.get("/logout", userController.logOut);
 
 module.exports = router;
 
