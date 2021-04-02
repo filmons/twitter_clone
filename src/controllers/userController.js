@@ -26,35 +26,35 @@ exports.newAccount = (request, response) => {
         } else if (result.length !== 0) {
             response.send("A user with this username already exists!");
         } else {
-            // const saltRounds = 10;
-            // bcrypt.hash(password, saltRounds, (error, hash) => {
-            //         if (error) {
-            //             response.send(error.message);
-            //         }
-            //         console.log(`+++hashed password: ` + hash);
-            const newUser = {
-                username,
-                email,
-                phone_number,
-                first_name,
-                last_name,
-                birth_day,
-                city,
-                password
-            }
-
-            // password: hash
-            console.log(`+++newUser: ` + newUser);
-            User.createUser(newUser, (error, result) => {
+            const saltRounds = 10;
+            bcrypt.hash(password, saltRounds, (error, hash) => {
                     if (error) {
                         response.send(error.message);
                     }
-                    // response.send(username);
-                    response.redirect("/");
+                    console.log(`+++hashed password: ` + hash);
+                    const newUser = {
+                        username,
+                        email,
+                        phone_number,
+                        first_name,
+                        last_name,
+                        birth_day,
+                        city,
+                        password: hash
+                    }
+
+                    // password: hash
+                    console.log(`+++newUser: ` + newUser);
+                    User.createUser(newUser, (error, result) => {
+                        if (error) {
+                            response.send(error.message);
+                        }
+                        // response.send(username);
+                        response.redirect("/");
 
 
+                    })
                 })
-                // })
                 // response.send("Ok");
         }
     });
