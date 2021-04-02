@@ -24,7 +24,7 @@ server.use(express.static("./src/assets"));
 
 
 
-const port = 3080;
+const port = 3030;
 
 server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`)

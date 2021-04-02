@@ -14,7 +14,7 @@
   <section class="section-accueil">
 
     <div class="tweet-navigation">
-      <img class="tweet-navigation-image" src="/images/logoTwitter.png" alt="">
+    <img class="tweet-navigation-image" src="/images/logoTwitter.png" alt="">
       <div class="tweet-navigation-link">
         <a href="/">
           <img src="/images/home-run.png" alt="">
@@ -60,33 +60,23 @@
       <div class="comments">
        
         <% tweets.forEach((tweet) => { %>
-    
-    
-          <!-- <li><a href="<%= "/tweet/id" %>"><%= tweet.text %></a></li> -->
-          
-         
-
-            <ul>
+       <ul>
             <div class="comments-comment">
               <a href="/username"><img src="./images/user.png" alt=""></a>
               <div class="comments-comment-content">
                 <div class="comments-comment-content-nameDate">
-                  <a href="/username">
-                    <h3 class="comments-comment-content-username"><%= tweet.text %></h3>
+                  <a href="/tweet/<%= tweet.id %>">
+                    <h3 class="comments-comment-content-username"><%= tweet.username %></h3>
                   </a>
                   <span class="comments-comment-content-date"><%= tweet.creation_date %></span>
                 </div>
-                <p class="comments-comment-content-text">Mon super tweet de la mort qui tue pour remplir l'espace </p>
+                <p class="comments-comment-content-text"><%= tweet.text %> </p>
               </div>
             </div>
-              <% })%>
     
-           
-       
         </ul>
-
-
       </div>
+      <% })%>
 
     </div>
 
