@@ -8,7 +8,7 @@ const tweetController = require("../controllers/tweetController");
 const router = express.Router();
 
 // CREATE, POST, GET ONE OR GET ALL TWEETS
-// router.get("/", tweetController.findAllTweets);
+router.get("/", tweetController.findAllTweets);
 // router.get("/tweets/:id", isAuth, tweetController.findOneTweet);
 router.post("/tweets", tweetController.addOneTweet);
 router.post("/tweets/delete/:id", tweetController.deleteOneTweet); // :x = params (in rul) / val dynamic
