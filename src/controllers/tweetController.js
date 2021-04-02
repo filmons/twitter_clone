@@ -14,28 +14,23 @@ exports.findAllTweets = (request, response) => {
     });
 }
 
-// exports.findOne = (request, response) => {
-//     const { id } = request.params;
-//     const { user } = request;
+/////////////////////////////////////////////////////
+exports.getTweetsDetail= (request, response) => {
 
-//     Promo.getOne(id, (error, result) => {
-//         if (error) {
-//             response.send(error.message);
-//         }
+  const{ id} = request.params;
+  const { tweet } = request;
+  console.log(request.body);
 
-//         const students = result;
-//         const promoName = result[0].name;
 
-//         response.render("promo.ejs", { promoName, students, user });
-//     });
-// }
+  Tweet.getTweetById(id, (error, tweets) => {
+    if (error) {
+      response.send(error.message);
+    }
+    console.log(request, id);
+  response.render("profile.ejs", { tweet ,tweets});
+  });
+}
 
-// exports.addOne = (request, response) => {
-//     Promo.create(request.body, (error, result) => {
-//         if (error) {
-//             response.send(error.message);
-//         }
+///////////////
 
-//         response.redirect("/");
-//     })
-// }
+ 
