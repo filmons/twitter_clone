@@ -27,6 +27,9 @@ exports.getTweetsDetail= (request, response) => {
       response.send(error.message);
     }
     console.log(request, id);
+    console.log(tweets);
+    //console.log(tweet);
+
   response.render("profile.ejs", { tweet ,tweets});
   });
 }
