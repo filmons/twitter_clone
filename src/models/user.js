@@ -15,7 +15,7 @@ const db = require("../db");
 
 // AFTER THAT I CREATE A NEW USER'S
 
-exports.authentificate= (username, callback) => {
+exports.getByUsername= (username, callback) => {
   db.query(`SELECT * FROM user WHERE username = "${username}";`, (error, result) => {
     if (error) {
       console.log("error: ", error);

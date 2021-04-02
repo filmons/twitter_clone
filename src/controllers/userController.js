@@ -52,55 +52,59 @@ exports.logIn = (request, response) => {
 
 exports.authentificate = (request, response) => {
   const { username, password } = request.body;
-  
-  console.log(username, password);
-  // User.getbyUsername(username, (error, result) => {
+      
+  console.log(request.body);
 
-  //   if (error) {
-  //     response.send(error.message);
-  //   }
+  User.getByUsername(username,(error, result) => {
 
-  //   if (result.length === 0) {
-  //     response.send("This user doesn't exist!");
-  //   }
+    if (error) {
+      response.send(error.message);
+    }
 
-//     const hash = result[0].password;
+    if (result.length === 0) {
+      response.send("This user doesn't exist!");
+    }
 
-//     bcrypt.compare(password, hash, (error, correct) => {
-//       if (error) {
-//         response.send(error.message);
-//       }
+    const hash = result[0].password;
+      
+   
+      bcrypt.compare(password, hash, (error, correct) => {
+        console.log("PASSWORD" + hash)
+     
+        if (error) {
+        response.send(error.message);
+      }
 
-//       if (!correct) {
-//         response.send("Invalid password!");
-//       }
+      if (!correct) {
+        response.send("Invalid password!");
+      }
 
-//       const user = {
-//         name: result[0].name,
-//         username: result[0].username,
-//         exp: MAXAGE
-//       };
+      const user = {
+        name: result[0].name,
+        username: result[0].username,
+        exp: MAXAGE
+      };
 
-//       jwt.sign(user, SECRET, (error, token) => {
-//         if (error) {
-//           response.send(error.message);
-//         }
+      jwt.sign(user, SECRET, (error, token) => {
+        if (error) {
+          response.send(error.message);
+        }
 
-//         request.user = {
-//           name: result[0].name,
-//           username: result[0].username,
-//         };
-//         response.cookie('authcookie', token, { maxAge: MAXAGE });
-//         response.redirect('/');
-//       });
+        request.user = {
+          name: result[0].name,
+          username: result[0].username,
+        };
+        response.cookie('authcookie', token, { maxAge: MAXAGE });
+        response.redirect('/');
+      });
 
-//     });
-    response.send(username);
-  // })
+    });
+    
+  })
 }
 
-// exports.logout = (request, response) => {
-//   response.clearCookie("authcookie");
-  // response.redirect("/");
-
-//////
+exports.logOut = (request, response) => {
+  // response.clearCookie("authcookie");
+  response.redirect("/login");
+  
+}

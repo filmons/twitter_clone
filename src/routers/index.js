@@ -17,8 +17,7 @@ router.get("/", tweetController.findAllTweets);
 // AUTHENTICATION
 router.get("/login", userController.logIn); 
 router.post("/login", userController.authentificate);
-
-// router.get("/logout", userController.logOut);
+router.get("/logout", userController.logOut);
 
 module.exports = router;
 
