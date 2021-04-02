@@ -16,13 +16,6 @@ router.post("/tweets/edit/:id", tweetController.editOneTweet);
 // router.post("/tweets/edit/:id", tweetController.editOneTweet);
 // /users/:userId/books/:bookId
 
-// router.post("/tweets/delete/:id", function(request, response) {
-// tweetController.deleteTweet
-// });
-
-// app.post('/user/all', function(req, res){
-//     Controller.Create
-//   });
 
 
 // INSCRIPTION 
