@@ -9,7 +9,7 @@ const MAXAGE = Math.floor(Date.now() / 1000) + (60 * 60); // 1 hour of expiratio
 exports.signUp = (request, response) => {
     response.render("signup.ejs");
 }
-exports.newAccount = (request, response) => { // is a func
+exports.newAccount = (request, response) => { // is a function
     const { username, password, email, phone_number, first_name, last_name, birth_day, city } = request.body; // more efficient
     // console.log(request.body);
     console.log(`username: ` + username);
@@ -28,7 +28,7 @@ exports.newAccount = (request, response) => { // is a func
                 if (error) {
                     response.send(error.message);
                 }
-                console.log(`+++hashed password: ` + hash);
+                console.log(`++hashed password: ` + hash);
                 const newUser = {
                     username,
                     email,
@@ -45,30 +45,21 @@ exports.newAccount = (request, response) => { // is a func
                     if (error) {
                         response.send(error.message);
                     }
-                    // response.send(username);
-                    console.log("User created");
+                    console.log(`User ${username} created!`);
                     response.redirect("/login");
                 })
             })
         }
     });
 }
-
-
-
-
-
 exports.logIn = (request, response) => {
     response.render("login.ejs");
 }
-
 exports.authentificate = (request, response) => {
     const { username, password } = request.body;
-
     console.log(request.body);
 
     User.usernameCheck(username, (error, result) => {
-
         if (error) {
             response.send(error.message);
         }
@@ -79,9 +70,8 @@ exports.authentificate = (request, response) => {
 
         const hash = result[0].password;
 
-
         bcrypt.compare(password, hash, (error, correct) => {
-            console.log("PASSWORD" + hash)
+            console.log("Hashed password: " + hash)
 
             if (error) {
                 response.send(error.message);
@@ -116,7 +106,6 @@ exports.authentificate = (request, response) => {
 }
 
 exports.logOut = (request, response) => {
-    // response.clearCookie("authcookie");
+    response.clearCookie("authcookie");
     response.redirect("/login");
-
 }

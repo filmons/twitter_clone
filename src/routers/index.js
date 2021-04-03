@@ -8,21 +8,14 @@ const tweetController = require("../controllers/tweetController");
 const router = express.Router();
 
 // CREATE, POST, GET ONE OR GET ALL TWEETS
-<<<<<<< HEAD
 router.get("/", tweetController.findAllTweets);
 // router.get("/tweets/:id", isAuth, tweetController.findOneTweet);
-router.post("/tweets", tweetController.addOneTweet);
-router.post("/tweets/delete/:id", tweetController.deleteOneTweet); // :x = params (in rul) / val dynamic
-router.post("/tweets/edit/:id", tweetController.editOneTweet);
-// router.post("/tweets/edit/:id", tweetController.editOneTweet);
-// /users/:userId/books/:bookId
+router.post("/tweets", isAuth, tweetController.addOneTweet);
+router.post("/tweets/delete/:id", isAuth, tweetController.deleteOneTweet); // :x = params (in rul) / val dynamic
+router.post("/tweets/edit/:id", isAuth, tweetController.editOneTweet);
 
 
 
-=======
-// router.get("/tweet:id", tweetController.getAllTweets);
-router.get("/", tweetController.findAllTweets);
->>>>>>> f7a232e4e2192cbc280421684eb56b185fce60f6
 // INSCRIPTION 
 // router.get("/signup/:id", userController.signUp); // recupérer la page d'inscriptions
 router.post("/signup", userController.newAccount); // recupère   les donées de l'utilisateur puis le redirige vers la page login

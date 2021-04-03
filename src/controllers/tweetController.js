@@ -26,9 +26,7 @@ exports.addOneTweet = (request, response) => {
     })
 }
 
-exports.deleteOneTweet = (request, response) => {
-    // request is an OBjECT that contains all the informations of the http request
-    // request.body is the BODY of the http request, it contains the DATA sent by the user
+exports.deleteOneTweet = (request, response) => { // request is an OBjECT that contains all the informations of the http request // request.body is the BODY of the http request, it contains the DATA sent by the user
     const { id } = request.params;
     // console.log(request.params);
     Tweet.deleteTweet(id, (error, tweet) => {
@@ -41,15 +39,12 @@ exports.deleteOneTweet = (request, response) => {
 }
 
 exports.editOneTweet = (request, response) => {
+    const { id } = request.params; // Get/destructure key "id" from request.params
+    const { name } = request.body; // Get/destructure key "name" from request.body
 
-    const { id } = request.params; // Get key(?) "id" from request.params
-    const { name } = request.body; // Get key(?) "name" from request.body
-
-    console.log(`--------------------------------------------------------------------------`);
     console.log(`++request.params object KEYS: ` + Object.keys(request.params));
-    console.log(`++request.params > id: ` + id);
+    console.log(`++request.params id: ` + id);
     console.log(`++request.body.name (message aka "name") = ` + request.body.name);
-    console.log(`--------------------------------------------------------------------------`);
 
     Tweet.editTweet(id, name, (error, result) => {
         if (error) {
