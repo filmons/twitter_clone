@@ -9,10 +9,40 @@ exports.findAllTweets = (request, response) => {
             response.send(error.message);
         }
 
-        console.log(tweet);
+        // console.log(tweet);
 
         response.render("index.ejs", { tweets, tweet });
     });
+}
+
+exports.getTweetsFromUser = (request, response) => { // list of tweets from one user
+    // console.log(request.params);
+
+    const { userID } = request.params;
+    // console.log(`++++`, userID);
+    Tweet.getAllTweetsFromUser(userID, (error, result) => {
+        if (error) {
+            response.send(error.message);
+        }
+        response.send(`selected user ${userID}!`);
+
+        // response.redirect("/user/1");
+    })
+}
+exports.getSpecificTweetFromUser = (request, response) => { // details of one tweet
+    const { userID } = request.params; // log routes variables! ex: /path/:id < 
+    const { tweetID } = request.params;
+
+    console.log(request.params);
+
+    Tweet.getOneTweetFromUser(userID, tweetID, (error, result) => {
+        if (error) {
+            response.send(error.message);
+        }
+        console.log(`getSpecificTweetFromUser: ` + result);
+        response.send(`got tweet ${tweetID} from user ${userID}!`)
+            // response.redirect(`/user/${userID}/tweet/${tweetID}`);
+    })
 }
 
 

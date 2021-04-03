@@ -61,14 +61,22 @@
                 <!-- <%= `${tweets}` %> -->
 
                 <% tweets.forEach((tweet) => { %>
+                    <!-- <% console.log(tweet); %> -->
+
                     <p>
-                        <a href="<%= " /tweet/1 " %>">
-                            <%= tweet.id %>
-                                <%= tweet.text %>
+                        <a href=" user/<%=tweet.user_id%> ">
+                            user: <%= tweet.user_id %>
+
                         </a>
 
+                        <a href=" user/<%=tweet.user_id%>/tweet/<%= tweet.id %> ">
+                            <p>
+                                <!-- <%= tweet.id %> -->
+                                <%= tweet.text %>
+                            </p>
+                        </a>
 
-                        <form class="form" action="/tweets/edit/<%=tweet.id %>" method="post">
+                        <form class="form" action="/tweet/<%=tweet.id %>/edit" method="post">
                             <div class="form-input">
                                 <label for="name"><%=tweet.id %></label>
                                 <input type="text" name="name" id="name" required>
@@ -77,7 +85,7 @@
                             </div>
                         </form>
 
-                        <form action="/tweets/delete/<%=tweet.id %>" method="post" class="tweet-container-form">
+                        <form action="/tweet/<%=tweet.id %>/delete" method="post" class="tweet-container-form">
                             <button type="submit" class="tweet-button">delete</button>
                         </form>
 

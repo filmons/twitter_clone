@@ -10,9 +10,36 @@ exports.getAllTweets = (callback) => {
         callback(null, result);
     })
 }
+
+exports.getAllTweetsFromUser = (userID, callback) => { // get connected user ID from ... ?
+    console.log(`+++selectedUser: ` + userID);
+    db.query(`SELECT * FROM tweet WHERE user_id = ${userID};`, (error, result) => {
+        if (error) {
+            console.log("error: ", error);
+            callback(error, null);
+            return;
+        }
+        callback(null, result);
+    })
+}
+exports.getOneTweetFromUser = (userID, tweetID, callback) => { // get x tweet from y user
+    // console.log(userID);
+    // console.log(tweetID);
+    db.query(`SELECT * FROM tweet WHERE user_id = ${userID} AND id = ${tweetID};`, (error, result) => {
+        if (error) {
+            console.log("error: ", error);
+            callback(error, null);
+            return;
+        }
+        callback(null, result);
+    })
+}
+
+
+
 exports.createTweet = (tweet, callback) => { // NEED TO IMPLEMENT USER ID > get current logged in user ID
     console.log(`create tweet | tweet contents: `);
-    console.log(tweet);
+    // console.log(tweet);
     db.query(`INSERT INTO tweet (text, creation_date, user_id)
                 VALUES ("${tweet.message}", NOW(), 1);`, (error, result) => {
         if (error) {
