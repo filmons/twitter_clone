@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twitter</title>
     <link rel="stylesheet" href="/css/style.css">
+
     <link rel="icon" href="/images/iconTwitter.png">
 </head>
 
@@ -14,7 +15,7 @@
     <section class="section-accueil">
 
         <div class="tweet-navigation">
-            <!-- <img class="tweet-navigation-image" src="/images/logoTwitter.png" alt=""> -->
+            <img class="tweet-navigation-image" src="/images/logoTwitter.png" alt="">
             <div class="tweet-navigation-link">
                 <a href="/">
                     <img src="/images/home-run.png" alt="">
@@ -54,43 +55,46 @@
                 <div class="tweet-container-button">
                     <button type="submit" class="tweet-button">Tweet</button>
                 </div>
+                <% console.log(tweets); %>
 
             </form>
             <p>
-                <!-- content viewer: -->
-                <!-- <%= `${tweets}` %> -->
 
                 <% tweets.forEach((tweet) => { %>
                     <!-- <% console.log(tweet); %> -->
 
                     <p>
                         <a href=" user/<%=tweet.user_id%> ">
-                            user: <%= tweet.user_id %>
-
+                            <%= tweet.username %>
                         </a>
+                        (ID:
+                        <%= tweet.user_id %>)
 
-                        <a href=" user/<%=tweet.user_id%>/tweet/<%= tweet.id %> ">
-                            <p>
-                                <!-- <%= tweet.id %> -->
-                                <%= tweet.text %>
-                            </p>
-                        </a>
+                            <a href=" user/<%=tweet.user_id%>/tweet/<%= tweet.id %> ">
+                                <p>
+                                    <!-- <%= tweet.id %> -->
+                                    <!-- TWEET TEXT: -->
+                                    <!-- <%= tweet.text %> -->
+                                    Tweet ID:
+                                    <%=tweet.id %>
+                                </p>
+                            </a>
 
-                        <form class="form" action="/tweet/<%=tweet.id %>/edit" method="post">
-                            <div class="form-input">
-                                <label for="name"><%=tweet.id %></label>
-                                <input type="text" name="name" id="name" required>
-                                <button type="submit" class="tweet-button">edit</button>
+                            <form class="form" action="/tweet/<%=tweet.id %>/edit" method="post">
+                                <div class="form-input">
+                                    <label for="name"><%= tweet.text %></label>
+                                    <input type="text" name="name" id="name" required>
+                                    <button type="submit" class="tweet-button">edit</button>
 
-                            </div>
-                        </form>
+                                </div>
+                            </form>
 
-                        <form action="/tweet/<%=tweet.id %>/delete" method="post" class="tweet-container-form">
-                            <button type="submit" class="tweet-button">delete</button>
-                        </form>
+                            <form action="/tweet/<%=tweet.id %>/delete" method="post" class="tweet-container-form">
+                                <button type="submit" class="tweet-button">delete</button>
+                            </form>
 
 
-                        <% }) %>
+                            <% }) %>
                     </p>
 
 

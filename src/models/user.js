@@ -2,7 +2,7 @@ const db = require("../db");
 
 
 exports.getByUsername = (username, callback) => { // callback = function
-    console.log(`got into user.js/getByUsername` + ` username value: ` + username);
+    // console.log(`got into user.js/getByUsername` + ` username value: ` + username);
     // console.log(`username value: ` + username);
     // console.log(`getByUsername(username) value: ` + username);
     // db.query(`SELECT username FROM user WHERE username = "${username}";`), (error, result) => {
@@ -13,8 +13,8 @@ exports.getByUsername = (username, callback) => { // callback = function
                 return;
             }
             callback(null, result);
-            console.log(`getByUsername SUCCESS`);
-            console.log(`callback result: ` + result);
+            // console.log(`getByUsername SUCCESS`);
+            // console.log(`callback result: ` + result);
         }) // end of callback
         // check every step 
 }
@@ -31,7 +31,7 @@ exports.usernameCheck = (username, callback) => {
 }
 
 exports.createUser = (user, callback) => {
-    console.log(`createUser: ` + user);
+    // console.log(`createUser: ` + user);
     // console.log(`+++(user): ${user}`); // need obj that contains obj.name pass etc
     console.log(`+++(user) keys: ` + Object.keys(user));
     db.query(`INSERT INTO user 
