@@ -7,10 +7,15 @@ const router = require("./routers");
 
 const server = express()
 
-// server.use(sass({
-//     src: "./src",
-//     dest: "./src/assets"
-// }));
+server.use(sass({
+    src: "./src",
+    dest: "./src/assets"
+}));
+
+server.use(express.urlencoded({ extended: false }));
+server.use(cookieParser());
+
+server.use(router);
 
 server.engine("ejs", ejs.renderFile);
 server.set("views", "./src/views");

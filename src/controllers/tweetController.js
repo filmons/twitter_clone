@@ -1,17 +1,17 @@
 const Tweet = require("../models/tweet");
 
-exports.findAllTweets = (request, response) => {
-    const { tweet } = request;
+exports.findAllTweets= (request, response) => {
+  const { tweet} = request;
 
-    Tweet.getAllTweets((error, tweets) => {
-        if (error) {
-            response.send(error.message);
-        }
+  Tweet.findAllTweets((error, tweets) => {
+    if (error) {
+      response.send(error.message);
+    }
 
-        console.log(tweet);
+    console.log(tweet);
 
-        response.render("index.ejs", { tweets, tweet });
-    });
+    response.render("index.ejs", { tweet,tweets });
+  });
 }
 
 /////////////////////////////////////////////////////
