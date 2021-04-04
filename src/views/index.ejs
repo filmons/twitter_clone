@@ -30,6 +30,8 @@
                     <h2>Bookmarks</h2>
                 </a>
                 <a href="/username">
+                    <!-- current logged in user -->
+
                     <img src="/images/user.png" alt="">
                     <h2>My Tweets</h2>
                 </a>
@@ -55,7 +57,7 @@
                 <div class="tweet-container-button">
                     <button type="submit" class="tweet-button">Tweet</button>
                 </div>
-                <% console.log(tweets); %>
+                <!-- <% console.log(tweets); %> -->
 
             </form>
             <p>
@@ -92,28 +94,16 @@
                             <form action="/tweet/<%=tweet.id %>/delete" method="post" class="tweet-container-form">
                                 <button type="submit" class="tweet-button">delete</button>
                             </form>
-
-
-                            <% }) %>
                     </p>
-
-
-
-
-
-
-
                     <div class="comments">
+                        comments comments comments
 
-
-
-
+                        <%=tweet.comments %>
                     </div>
-
+                    <% }) %>
         </div>
 
-        <div class="tweet-search"></div>
-
+        <div class="tweet-search"> search</div>
     </section>
 </body>
 

@@ -4,10 +4,12 @@ const SECRET = "pouetpouet";
 
 const isAuth = (request, response, next) => {
     const token = request.cookies.authcookie;
+    console.log(`token: ` + token);
 
     jwt.verify(token, SECRET, (error, user) => {
         if (error) {
-            response.send(error.message + ` : Please log in.`);
+            response.redirect("/login");
+            // response.send(error.message + ` : Please log in.`);
         } else {
             const { name, username, exp } = user;
 

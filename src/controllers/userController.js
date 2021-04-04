@@ -40,7 +40,7 @@ exports.newAccount = (request, response) => { // is a function
                     password: hash
                 }
 
-                console.log(`+++newUser: ` + newUser);
+                // console.log(`+++newUser: ` + newUser);
                 User.createUser(newUser, (error, result) => {
                     if (error) {
                         response.send(error.message);
@@ -52,56 +52,61 @@ exports.newAccount = (request, response) => { // is a function
         }
     });
 }
-exports.logIn = (request, response) => {
-    response.render("login.ejs");
+exports.logIn = async(request, response) => {
+    const alerts_warning = await request.consumeFlash('warning');
+    console.log(alerts_warning);
+    // IF ALREADY LOGGED IN, redirect to home, else, render login page <<<
+    response.render("login.ejs", { alerts_warning });
 }
-exports.authentificate = (request, response) => {
+exports.authentificate = async(request, response) => {
     const { username, password } = request.body;
     console.log(request.body);
 
-    User.usernameCheck(username, (error, result) => {
+    if (!username || !password)
+        await request.flash("warning", "Veuillez remplir tout les champs requis.")
+    User.usernameCheck(username, async(error, result) => {
         if (error) {
             response.send(error.message);
-        }
+        } else if (result.length === 0) {
+            await request.flash("warning", "This user doesn't exist.")
+            response.redirect("/login");
+        } else {
 
-        if (result.length === 0) {
-            response.send("This user doesn't exist!");
-        }
+            const hash = result[0].password;
 
-        const hash = result[0].password;
-
-        bcrypt.compare(password, hash, (error, correct) => {
-            console.log("Hashed password: " + hash)
-
-            if (error) {
-                response.send(error.message);
-            }
-
-            if (!correct) {
-                response.send("Invalid password!");
-            }
-
-            const user = {
-                name: result[0].name,
-                username: result[0].username,
-                exp: MAXAGE
-            };
-
-            jwt.sign(user, SECRET, (error, token) => {
+            bcrypt.compare(password, hash, async(error, correct) => {
+                console.log("Hashed password: " + hash)
+                console.log(`CORRECT: ` + correct);
                 if (error) {
                     response.send(error.message);
                 }
 
-                request.user = {
+                if (!correct) {
+                    await request.flash("warning", "Invalid password!")
+                    response.redirect("/login");
+                }
+
+                const user = {
                     name: result[0].name,
                     username: result[0].username,
+                    exp: MAXAGE
                 };
-                response.cookie('authcookie', token, { maxAge: MAXAGE });
-                response.redirect('/');
+
+                jwt.sign(user, SECRET, (error, token) => {
+                    if (error) {
+                        response.send(error.message);
+                    }
+
+                    request.user = {
+                        name: result[0].name,
+                        username: result[0].username,
+                    };
+                    response.cookie('authcookie', token, { maxAge: MAXAGE });
+                    response.redirect('/');
+                });
+
             });
-
-        });
-
+        }
     })
 }
 
