@@ -12,11 +12,11 @@ exports.signUp = (request, response) => {
 exports.newAccount = (request, response) => { // is a function
     const { username, password, email, phone_number, first_name, last_name, birth_day, city } = request.body; // more efficient
     // console.log(request.body);
-    console.log(`username: ` + username);
+    // console.log(`username: ` + username);
 
     User.getByUsername(username, (error, result) => { // < callback is a function with 2 params // model // gets data from db from user.js
         // getByUsername is a MODEL // do stuff with data gotten from server
-        console.log(`username: ` + username);
+        // console.log(`username: ` + username);
         // console.log(`+++got into getByUsername`);
         if (error) {
             response.send(error.message);
@@ -45,7 +45,7 @@ exports.newAccount = (request, response) => { // is a function
                     if (error) {
                         response.send(error.message);
                     }
-                    console.log(`User ${username} created!`);
+                    // console.log(`User ${username} created!`);
                     response.redirect("/login");
                 })
             })
@@ -60,7 +60,7 @@ exports.logIn = async(request, response) => {
 }
 exports.authentificate = async(request, response) => {
     const { username, password } = request.body;
-    console.log(request.body);
+    // console.log(request.body);
 
     if (!username || !password)
         await request.flash("warning", "Veuillez remplir tout les champs requis.")

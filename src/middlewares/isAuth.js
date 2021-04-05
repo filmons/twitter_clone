@@ -17,6 +17,9 @@ const isAuth = (request, response, next) => {
                 response.clearCookie("authcookie");
                 response.send("Session expired. Please log in.");
             }
+            console.log(user);
+            console.log(name);
+            console.log(username);
 
             request.user = { name, username };
             next();

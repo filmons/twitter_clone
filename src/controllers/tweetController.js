@@ -3,6 +3,10 @@ const Tweet = require("../models/tweet");
 
 exports.findAllTweets = (request, response) => {
     const { tweet } = request;
+    const { user } = request;
+
+    console.log(`++++++++++++++++user: ` + user);
+    console.log(`++++++++++++++++req: ` + request);
 
     Tweet.getAllTweets((error, tweets) => {
         if (error) {
@@ -11,7 +15,7 @@ exports.findAllTweets = (request, response) => {
 
         // console.log(tweet);
 
-        response.render("index.ejs", { tweets, tweet });
+        response.render("index.ejs", { tweets, tweet, user });
     });
 }
 
@@ -72,8 +76,8 @@ exports.deleteOneTweet = (request, response) => { // request is an OBjECT that c
 }
 
 exports.editOneTweet = (request, response) => {
-    console.log(`++request: ` + Object.keys(request.body));
-    console.log(`++request: ` + request.body.name);
+    // console.log(`++request: ` + Object.keys(request.body));
+    // console.log(`++request: ` + request.body.name);
 
 
     const { tweetID } = request.params; // Get/destructure key "id" from request.params

@@ -33,7 +33,7 @@ exports.usernameCheck = (username, callback) => {
 exports.createUser = (user, callback) => {
     // console.log(`createUser: ` + user);
     // console.log(`+++(user): ${user}`); // need obj that contains obj.name pass etc
-    console.log(`+++(user) keys: ` + Object.keys(user));
+    // console.log(`+++(user) keys: ` + Object.keys(user));
     db.query(`INSERT INTO user 
     (username, password, first_name, last_name, 
         birth_date, email, phone_number, city) 
