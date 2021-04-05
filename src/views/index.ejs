@@ -64,44 +64,53 @@
                 <!-- <%= console.log(tweets); %> -->
                 <% tweets.forEach((tweet) => { %>
 
-                    <p>
-                        <a href=" user/<%=tweet.user_id%> ">
-                            <%= tweet.username %>
-                        </a>
-                        (ID:
-                        <%= tweet.user_id %>)
+
+                    <div class="comments-comment">
+                        <a href="/user/picture"><img src="/src/assets/images/user.png" alt=""></a>
+                        <div class="comments-comment-content">
+                            <div class="comments-comment-content-nameDate">
+                                <a href="/user/<%= tweet.user_id %>">
+                                    <h3 class="comments-comment-content-username">
+                                        <%= tweet.username %>
+                                            (ID:
+                                            <%= tweet.user_id %>)
+                                    </h3>
+                                </a>
+                                <span class="comments-comment-content-date"><%= tweet.creation_date %></span>
+                            </div>
+
+
 
                             <a href=" user/<%=tweet.user_id%>/tweet/<%= tweet.id %> ">
-                                <p>
-                                    <!-- <%= tweet.id %> -->
-                                    <!-- TWEET TEXT: -->
-                                    <!-- <%= tweet.text %> -->
-                                    Tweet ID:
-                                    <%=tweet.id %>
+                                <p class="comments-comment-content-text">
+                                    <%= tweet.text %>
+                                        [tweet id:
+                                        <%=tweet.id %>]
                                 </p>
                             </a>
+                            <form class="form" action="tweet/<%=tweet.id %>/edit" method="post">
+                                <!-- <form class="form" action="/tweet/<%=tweet.id %>/edit" method="post"> -->
 
-                            <form class="form" action="/tweet/<%=tweet.id %>/edit" method="post">
                                 <div class="form-input">
-                                    <label for="name"><%= tweet.text %></label>
+                                    <label for="name">Edit tweet</label>
                                     <input type="text" name="name" id="name" required>
                                     <button type="submit" class="tweet-button">edit</button>
 
                                 </div>
                             </form>
 
+
                             <form action="/tweet/<%=tweet.id %>/delete" method="post" class="tweet-container-form">
                                 <button type="submit" class="tweet-button">delete</button>
                             </form>
-                    </p>
-                    <div class="comments">
-                        comments comments comments
-
-                        <%=tweet.comments %>
+                        </div>
+                        <div class="comments">
+                            <%=tweet.comments %>
+                        </div>
                     </div>
+
                     <% }) %>
         </div>
-
         <div class="tweet-search"> search</div>
     </section>
 </body>

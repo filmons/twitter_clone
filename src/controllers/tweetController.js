@@ -24,13 +24,15 @@ exports.getTweetsFromUser = (request, response) => { // list of tweets from one 
 
     const { userID } = request.params;
     // console.log(`++++`, userID);
-    Tweet.getAllTweetsFromUser(userID, (error, result) => {
+    Tweet.getAllTweetsFromUser(userID, (error, tweets) => {
+        // console.log(`+++result: ` + result);
         if (error) {
             response.send(error.message);
         }
-        response.send(`selected user ${userID}!`);
+        // response.send(`selected user ${userID}!`);
 
-        // response.redirect("/user/1");
+        response.render(`profile.ejs`, { tweets });
+        // response.redirect(`/user/${userID}`);
     })
 }
 exports.getSpecificTweetFromUser = (request, response) => { // details of one tweet
@@ -44,8 +46,8 @@ exports.getSpecificTweetFromUser = (request, response) => { // details of one tw
             response.send(error.message);
         }
         // console.log(`getSpecificTweetFromUser: ` + result);
-        response.send(`got tweet ${tweetID} from user ${userID}!`)
-            // response.redirect(`/user/${userID}/tweet/${tweetID}`);
+        // response.send(`got tweet ${tweetID} from user ${userID}!`)
+        response.redirect(`/user/${userID}/tweet/${tweetID}`);
     })
 }
 

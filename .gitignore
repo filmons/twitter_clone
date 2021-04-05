@@ -1,3 +1,5 @@
 node_modules/
 example.js
 .env
+src/views/index copy.ejs
+src/views/index.html
