@@ -9,6 +9,9 @@ const MAXAGE = Math.floor(Date.now() / 1000) + (60 * 60); // 1 hour of expiratio
 exports.signUp = (request, response) => {
     response.render("signup.ejs");
 }
+
+
+
 exports.newAccount = (request, response) => { // is a function
     const { username, password, email, phone_number, first_name, last_name, birth_day, city } = request.body; // more efficient
     // console.log(request.body);

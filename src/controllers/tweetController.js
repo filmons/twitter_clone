@@ -47,7 +47,7 @@ exports.getSpecificTweetFromUser = (request, response) => { // details of one tw
         }
         // console.log(`getSpecificTweetFromUser: ` + result);
         // response.send(`got tweet ${tweetID} from user ${userID}!`)
-        response.redirect(`/user/${userID}/tweet/${tweetID}`);
+        response.redirect(`user/${userID}/tweet/${tweetID}`);
     })
 }
 
