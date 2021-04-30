@@ -9,13 +9,11 @@ const router = require("./routers");
 
 const server = express()
 
-// On startm run sass?
 server.use(sass({
     src: "./src",
     dest: "./src/assets"
 }));
 
-// FLASH MESSAGES
 server.use(session({
     secret: 'stopreadingmeimsecret',
     resave: false,
@@ -24,7 +22,6 @@ server.use(session({
 }))
 
 server.use(flash({ sessionKeyName: 'flashMessage' }));
-// LASH MESSAGES
 
 server.engine("ejs", ejs.renderFile);
 server.set("views", "./src/views");
