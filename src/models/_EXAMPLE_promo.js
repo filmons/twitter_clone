@@ -14,6 +14,7 @@
 // }
 
 // exports.getOne = (id, callback) => {
+             
 //   db.query(`SELECT * FROM promos INNER JOIN students ON promos.id = students.promo_id WHERE promos.id = ${id};`, (error, result) => {
 //     if (error) {
 //       console.log("error: ", error);
