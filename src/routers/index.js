@@ -1,6 +1,6 @@
 const express = require("express");
 
-const isAuth = require('../middlewares/isAuth');
+const isAuth = require("../middlewares/isAuth");
 
 const userController = require("../controllers/userController");
 const tweetController = require("../controllers/tweetController");
@@ -14,14 +14,18 @@ router.post("/tweet/:tweetID/delete", isAuth, tweetController.deleteOneTweet); /
 router.post("/tweet/:tweetID/edit", isAuth, tweetController.editOneTweet);
 
 router.get("/user/:userID", tweetController.getTweetsFromUser);
-router.get("/user/:userID/tweet/:tweetID", tweetController.getSpecificTweetFromUser);
+router.get(
+  "/user/:userID/tweet/:tweetID",
+  tweetController.getSpecificTweetFromUser
+);
 
-// INSCRIPTION 
-router.post("/signup", userController.newAccount); 
-router.get("/signup", userController.signUp); 
+// INSCRIPTION
+router.post("/signup", userController.newAccount);
+router.get("/signup", userController.signUp);
 // AUTHENTICATION
 router.get("/login", userController.logIn);
 router.post("/login", userController.authentificate);
+
 router.get("/logout", userController.logOut);
 
 module.exports = router;
