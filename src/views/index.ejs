@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Twitter</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="icon" href="/images/iconTwitter.png">
 </head>
 
@@ -29,7 +29,7 @@
           <h2>Bookmarks</h2>
         </a>
         <a href="/username">
-          <img src="/images/user.png" alt="">
+          <img src="/src/assets/images/user.png" alt="">
           <h2>My Tweets</h2>
         </a>
         <a href="/logout">
@@ -61,7 +61,7 @@
         <% tweets.forEach((tweet) => { %>
        <ul>
             <div class="comments-comment">
-              <a href="/username"><img src="./images/user.png" alt=""></a>
+              <a href="/username"><img src="../assets/images/user.png" alt=""></a>
               <div class="comments-comment-content">
                 <div class="comments-comment-content-nameDate">
                   <a href="/tweet/<%= tweet.id %>">
@@ -73,15 +73,29 @@
               </div>
             </div>
     
-        </ul>
-      </div>
+        
+        <form class="form" action="/tweets/edit/<%=tweet.id %>" method="post">
+          <div class="form-input">
+              <label for="name"><%=tweet.id%></label>
+              <div class="tweet-container-text">
+                <textarea name="message" id="message" placeholder="edit tweet"></textarea>
+              </div>
+              <button type="submit" class="tweet-button">edit</button>
+          </div>
+          
+      </form>
+    </ul>
+   
+
+        <form action="/tweets/delete/<%=tweet.id %>" method="post" class="tweet-container-form">
+          <button type="submit" class="tweet-button">delete</button>
+      </form>
+
+
+
+      
       <% })%>
-
-    </div>
-
-    <div class="tweet-search"></div>
-
-  </section>
-</body>
+      </div>      
+    </body>
 
 </html>

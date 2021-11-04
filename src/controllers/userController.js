@@ -6,101 +6,105 @@ const User = require("../models/user");
 const SECRET = "pouetpouet";
 const MAXAGE = Math.floor(Date.now() / 1000) + (60 * 60); // 1 hour of expiration
 
-// exports.signUp = (request, response) => {
-//   response.render("signup.ejs");
-// }
+exports.signUp = (request, response) => {
+    response.render("signup.ejs");
+}
+exports.newAccount = (request, response) => { // is a function
+    const { username, password, email, phone_number, first_name, last_name,  city } = request.body; // more efficient
+     console.log(request.body);
+    console.log(`username: ` + username);
 
-// exports.newAccount = (request, response) => {
-//   const { name, username, password } = request.body;
+    User.getByUsername(username, (error, result) => { // < callback is a function with 2 params // model // gets data from db from user.js
+        // getByUsername is a MODEL // do stuff with data gotten from server
+        console.log(`username: ` + username);
+        // console.log(`+++got into getByUsername`);
+        if (error) {
+            response.send(error.message);
+        } else if (result.length !== 0) {
+            response.send("A user with this username already exists!");
+        } else {
+            const saltRounds = 10;
+            bcrypt.hash(password, saltRounds, (error, hash) => {
+                if (error) {
+                    response.send(error.message);
+                }
+                console.log(`++hashed password: ` + hash);
+                const newUser = {
+                    username,
+                    email,
+                    phone_number,
+                    first_name,
+                    last_name,
+                    city,
+                    password: hash
+                }
 
-  // User.getByUsername(username,(error, result) => {
-  //   if (error) {
-  //     response.send(error.message);
-
-  //   if (result.length !== 0) {
-  //     response.send("A user with this username already exists!");
-  //   }
-
-  //   const saltRounds = 10;
-
-  //   bcrypt.hash(password, saltRounds, (error, hash) => {
-       
-  //     if (error) {
-  //       response.send(error.message);
-  //     }
-  //     console.log(hash);
-  //     const newUser = {
-  //       name,
-  //       username,
-  //       password: hash
-  //     }
-      // response.redirect("/");
-      // response.send("ok");
-      // User.create(newUser, (error, result) => {
-      //   if (error) {
-      //     response.send(error.message);
-      //   }
-
-      // })
-//     })
-//   });
-// }
-
+                console.log(`+++newUser: ` + newUser);
+                User.createUser(newUser, (error, result) => {
+                    if (error) {
+                        response.send(error.message);
+                    }
+                    console.log(`User ${username} created!`);
+                    response.redirect("/login");
+                })
+            })
+        }
+    });
+}
 exports.logIn = (request, response) => {
-  response.render("login.ejs");
+    response.render("login.ejs");
 }
-
 exports.authentificate = (request, response) => {
-  const { username, password } = request.body;
-  
-  console.log(username, password);
-  // User.getbyUsername(username, (error, result) => {
+    const { username, password } = request.body;
+    console.log(request.body);
 
-  //   if (error) {
-  //     response.send(error.message);
-  //   }
+    User.usernameCheck(username, (error, result) => {
+        if (error) {
+            response.send(error.message);
+        }
 
-  //   if (result.length === 0) {
-  //     response.send("This user doesn't exist!");
-  //   }
+        if (result.length === 0) {
+            response.send("This user doesn't exist!");
+        }
 
-//     const hash = result[0].password;
+        const hash = result[0].password;
 
-//     bcrypt.compare(password, hash, (error, correct) => {
-//       if (error) {
-//         response.send(error.message);
-//       }
+        bcrypt.compare(password, hash, (error, correct) => {
+            console.log("Hashed password: " + hash)
 
-//       if (!correct) {
-//         response.send("Invalid password!");
-//       }
+            if (error) {
+                response.send(error.message);
+            }
 
-//       const user = {
-//         name: result[0].name,
-//         username: result[0].username,
-//         exp: MAXAGE
-//       };
+            if (!correct) {
+                response.send("Invalid password!");
+            }
 
-//       jwt.sign(user, SECRET, (error, token) => {
-//         if (error) {
-//           response.send(error.message);
-//         }
+            const user = {
+                name: result[0].name,
+                username: result[0].username,
+                exp: MAXAGE
+            };
 
-//         request.user = {
-//           name: result[0].name,
-//           username: result[0].username,
-//         };
-//         response.cookie('authcookie', token, { maxAge: MAXAGE });
-//         response.redirect('/');
-//       });
+            jwt.sign(user, SECRET, (error, token) => {
+                if (error) {
+                    response.send(error.message);
+                }
 
-//     });
-    response.send(username);
-  // })
+                request.user = {
+                    name: result[0].name,
+                    username: result[0].username,
+                };
+                response.cookie('authcookie', token, { maxAge: MAXAGE });
+                response.redirect('/');
+            });
+
+        });
+
+    })
 }
 
-// exports.logout = (request, response) => {
-//   response.clearCookie("authcookie");
-  // response.redirect("/");
-
-//////
+exports.logOut = (request, response) => {
+    response.clearCookie("authcookie");
+    response.redirect("/login");
+}

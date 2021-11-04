@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Twitter</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="icon" href="/images/iconTwitter.png">
 </head>
 
@@ -29,11 +29,11 @@
           <h2>Bookmarks</h2>
         </a>
         <a href="/username">
-          <img src="/images/user.png" alt="">
+          <img src="/src/assets/images/user.png" alt="">
           <h2>My Tweets</h2>
         </a>
         <a href="/logout">
-          <img src="/images/logout.png" alt="">
+          <img src="/src/assets/images/logout.png" alt="">
           <h2>Logout</h2>
         </a>
       </div>
@@ -41,16 +41,17 @@
 
     <div class="tweet-container">
       <div class="tweet-container-title">
-        <h3><%= tweets[0].username %></h3>
+        
       </div>
       <div class="tweet-container-profile">
         <div class="tweet-container-profile-background">
           <img src="" alt="">
         </div>
         <div class="tweet-container-profile-picture">
-          <img src="./images/user.png" alt="">
+          <img src="/src/assets/images/user.png" alt="">
         </div>
         <div class="tweet-container-profile-infos">
+          <h3><%= tweets[0].username %></h3>
           <h3><%= tweets[0].last_name %></h3>
           <h4>@<%= tweets[0].first_name %></h4>
           <p><%= tweets[0].phone_number %></p>
@@ -60,24 +61,32 @@
 
       <div class="comments">
         
-        <% tweets.forEach((tweet) => { %>
-         
+       
 
+      <% if (tweet ) { %>
+        <p>here<%= user.id %></p>
+       <% } %>
+
+      <% tweets.forEach((tweet)=>{ %>
         <div class="comments-comment">
-          <a href="/username"><img src="" alt=""></a>
+          <a href="/username"><img src="<%= tweet.url %>" alt=""></a>
           <div class="comments-comment-content">
             <div class="comments-comment-content-nameDate">
               <a href="/username">
-                <h3 class="comments-comment-content-username"><%= tweet.name %></h3>
+                <h3 class="comments-comment-content-username"><%= tweet.username %></h3>
               </a>
-              <span class="comments-comment-content-date"><%= tweet.creation_date %> </span>
+              <span class="comments-comment-content-date"><%= tweet.creation_date %></span>
             </div>
-            <p class="comments-comment-content-text"><%= tweet.text %> </p>
+            <p class="comments-comment-content-text"><%= tweet.text %></p>
           </div>
+         
         </div>
-      </div>
+
+
+        <% })%>
+
       
-      <% })%>
+     
       
 
     <div class="tweet-search"></div>

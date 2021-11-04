@@ -26,12 +26,9 @@ server.use(cookieParser());
 
 server.use(router);
 
-const port = 8080;
+const port = 8000;
 
 server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`)
 });
 
-// server.get('/', (request, response) => {
-//     response.send('Hello World!')
-// })
